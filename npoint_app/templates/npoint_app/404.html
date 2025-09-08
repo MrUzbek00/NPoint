@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>404 - JSON Not Found</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --turquoise: #4ecdc4;
+            --soft-yellow: #ffe66d;
+            --coral-red: #ff6b6b;
+            --deep-teal: #1a535c;
+            --background-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-primary {
+             @apply bg-[var(--turquoise)] text-[var(--deep-teal)] font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors duration-300;
+        }
+        .btn-secondary {
+             @apply bg-transparent border-2 border-[var(--turquoise)] text-[var(--turquoise)] font-bold py-3 px-6 rounded-lg hover:bg-[var(--turquoise)] hover:text-[var(--deep-teal)] transition-colors duration-300;
+        }
+    </style>
+</head>
+<body class="bg-[var(--background-color)]">
+<div class="flex flex-col items-center justify-center min-h-screen text-center px-4">
+<div class="max-w-md w-full">
+<div class="mb-8">
+<svg class="mx-auto h-32 w-32 text-[var(--coral-red)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M18.364 5.636l-12.728 12.728m12.728 0L5.636 5.636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M12 9v.01M12 15v.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M8.5 7.5h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M8.5 16.5h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M7 12h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M8,4.5 C8,3.12 9.12,2 10.5,2 h3 C14.88,2 16,3.12 16,4.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+<path d="M8,19.5 C8,20.88 9.12,22 10.5,22 h3 C14.88,22 16,20.88 16,19.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+</svg>
+</div>
+<h1 class="text-6xl font-poppins font-bold text-[var(--deep-teal)] mb-2">404</h1>
+<h2 class="text-2xl font-poppins font-semibold text-[var(--deep-teal)] mb-4">JSON Not Found</h2>
+<div class="bg-[var(--soft-yellow)] bg-opacity-20 rounded-lg p-6 relative shadow-inner">
+<p class="text-[var(--deep-teal)] text-lg">
+<span class="font-mono text-[var(--coral-red)]">{</span><br/>
+<span class="ml-4 font-mono"><span class="text-[var(--turquoise)]">"error"</span>: <span class="text-[var(--coral-red)]">"Not Found"</span>,</span><br/>
+<span class="ml-4 font-mono"><span class="text-[var(--turquoise)]">"message"</span>: <span class="text-white bg-[var(--coral-red)] px-1 rounded">"Oops! This page is a ghost in the machine."</span></span><br/>
+<span class="font-mono text-[var(--coral-red)]">}</span>
+</p>
+</div>
+<p class="text-gray-500 mt-6 mb-8">
+                Looks like the data you were searching for has decided to play hide-and-seek.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a class="btn-secondary" href="#">
+                    Return to Home
+                </a>
+<a class="btn-primary" href="#">
+                    Go to Dashboard
+                </a>
+</div>
+</div>
+</div>
+
+</body></html>

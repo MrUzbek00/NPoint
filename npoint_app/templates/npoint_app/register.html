@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON Manager - Login/Register</title>
+  <meta name="description" content="Npoint Uz - Free JSON storage and sharing service. Create, manage, and share your JSON data effortlessly.">
+  <meta name="keywords" content="JSON, API, Data Storage, JSON Sharing, Free JSON, Online JSON, JSON Manager">
+  <meta name="author" content="Npoint Uz">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4ecdc4">
+
+  <link rel="icon" sizes="512x512" href="{% static 'npoint_app/images/web_icon.png' %}" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'npoint_app/images/web_icon.png' %}"> 
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static 'npoint_app/images/web_icon.png' %}"> 
+  <link rel="shortcut icon" href="{% static 'npoint_app/images/web_icon.png' %}" type="image/x-icon"> 
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'npoint_app/images/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'npoint_app/images/site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'npoint_app/images/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4ecdc4;
+      --coral-red: #ff6b6b;
+      --white: #ffffff;
+      --text-primary: #1a202c;
+      --text-secondary: #718096;
+      --background-color: #f7fafc;
+    }
+    body {
+      background-color: var(--background-color);
+      font-family: 'Poppins', sans-serif;
+    }
+    .input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      background-color: #edf2f7;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .input:focus {
+      background-color: white;
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.5);
+    }
+    .button_primary {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: bold;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease-in-out;
+    }
+    .button_primary:hover {
+      background-color: #3bbdb5;
+      transform: scale(1.05);
+    }
+    .button_secondary {
+      width: 100%;
+      background-color: #e2e6ea;
+      color: var(--text-primary);
+      font-weight: bold;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      transition: transform 0.3s ease-in-out;
+    }
+    .button_secondary:hover {
+      background-color: #d6d8db;
+      transform: scale(1.05);
+    }
+    .tab {
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      padding-bottom: 0.5rem;
+      cursor: pointer;
+    }
+    .tab.active {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="w-100" style="max-width: 400px;">
+      <div class="bg-white rounded-lg shadow p-4">
+        <div class="text-center mb-4">
+          <h1 class="h3 font-weight-bold text-dark">JSON Manager</h1>
+          <p class="text-muted">Welcome! Please enter your details.</p>
+        </div>
+        <div class="mb-4 border-bottom d-flex justify-content-center">
+            <div class="tab px-3 py-2 font-weight-semibold active ">Register</div>
+        </div>
+
+        {# ---- REGISTER PANE ---- #}
+          <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            {{ reg_form.non_field_errors }}
+
+            <div class="form-group">
+              <label class="sr-only" for="{{ reg_form.username.id_for_label }}">Username</label>
+              {{ reg_form.username }}
+              {{ reg_form.username.errors }}
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only" for="{{ reg_form.email.id_for_label }}">Email</label>
+              {{ reg_form.email }}
+              {{ reg_form.email.errors }}
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only" for="{{ reg_form.password1.id_for_label }}">Password</label>
+              {{ reg_form.password1 }}
+              {{ reg_form.password1.errors }}
+            </div>
+
+            <div class="form-group">
+              <label class="sr-only" for="{{ reg_form.password2.id_for_label }}">Confirm Password</label>
+              {{ reg_form.password2 }}
+              {{ reg_form.password2.errors }}
+            </div>
+
+            <button type="submit" class="button_primary">Create account</button>
+          </form>
+       
+
+        <div class="d-flex align-items-center my-4">
+          <div class="flex-fill border-top"></div>
+          <span class="px-2 text-muted">Or Have an account?</span>
+          <div class="flex-fill border-top"></div>
+        </div>
+        <button class="button_secondary d-flex align-items-center justify-content-center">
+          <svg class="mr-2" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+          </svg>
+          <a href="{% url 'login' %}" class="font-weight-bold text-primary">Log in now</a>
+        </button>
+      </div>
+      <div class="text-center mt-3">
+        <span class="px-2 text-muted">By using this website you agree on </span>
+        <a href="{% url 'terms_of_service' %}" class="text-primary font-weight-bold">Terms of Service</a>
+        <span class="px-1 text-muted">and</span>
+        <a href="{% url 'privacy_policy' %}" class="text-primary font-weight-bold">Privacy Policy</a>
+      </div>  
+      
+    </div>
+  </div>
+
+  
+</body>
+</html>

@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Npoint Uz</title>
+  <meta name="description" content="Npoint Uz - Free JSON storage and sharing service. Create, manage, and share your JSON data effortlessly.">
+  <meta name="keywords" content="JSON, API, Data Storage, JSON Sharing, Free JSON, Online JSON, JSON Manager">
+  <meta name="author" content="Npoint Uz">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4ecdc4">
+
+  <link rel="icon" sizes="512x512" href="{% static 'npoint_app/images/web_icon.png' %}" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="icon" type="image/png" sizes="48x48" href="{% static 'npoint_app/images/web_icon.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'npoint_app/images/web_icon.png' %}"> 
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static 'npoint_app/images/web_icon.png' %}"> 
+  <link rel="shortcut icon" href="{% static 'npoint_app/images/web_icon.png' %}" type="image/x-icon"> 
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'npoint_app/images/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'npoint_app/images/site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'npoint_app/images/safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="{% static 'npoint_app/css/index_style.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=logout" />
+  
+  
+</head>
+<body class="d-flex flex-column min-vh-100">
+{% comment %}<nav class="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top py-3">
+  <div class="container">
+    <a class=" font-weight-bold mb-0 h2 " href="{% url 'main' %}">Npoint Uz</a>
+
+    <div class="ml-auto d-flex align-items-center">
+      <!-- Desktop links -->
+      <div class="d-none d-md-flex align-items-center mr-3">
+        <a href="{% url 'main' %}" class="text-muted mx-2">Dashboard</a>
+        <a href="{% url 'docs' %}" class="text-dark font-weight-medium mx-2">Docs</a>
+        <a href="{% url 'main' %}" class="text-muted mx-2">API</a>
+        {% if user.is_authenticated %}
+        <button class="btn button-primary-custom mx-3">New JSON</button>
+        <!-- Profile dropdown -->
+      <div class="dropdown">
+            <a href="#"
+              class="d-block"
+              id="profileDropdown"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              role="button">
+              <div class="profile-pic"></div>
+            </a>
+        <div class="dropdown-menu dropdown-menu-right text-center text-md-left" aria-labelledby="profileDropdown">
+          <!-- Mobile Menu -->
+          <div class="d-md-none m-2">
+            <a class="dropdown-item" href="#">Dashboard</a>
+            <a class="dropdown-item" href="#">Docs</a>
+            <a class="dropdown-item" href="#">API</a>
+            <div class="dropdown-divider"></div>
+          </div>
+          <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button class="dropdown-item text-danger sign-out" type="submit"><span class="material-symbols-outlined mx-1">logout</span>Sign Out</button>
+          </form>
+        </div>
+      </div>
+        {% else %}
+        <div class="mx-2">
+            <a href="{% url 'login' %}" class="btn button-secondary-custom mr-2">Log In</a>
+          <a href="{% url 'register'%}" class="btn button-primary-custom">Sign Up</a>
+          </div>
+          {% endif %}
+      </div>
+
+      
+    </div>
+  </div>
+</nav>{% endcomment %}
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom sticky-top py-3">
+  <div class="container">
+    {% comment %} <a class="navbar-brand font-weight-bold mb-0 h2" href="{% url 'main' %}">Npoint Uz</a> {% endcomment %}
+    
+    <a class=" font-weight-bold mb-0 logo " 
+    {% if user.is_authenticated %}
+      href="{% url 'main' %}"
+    {% else %}
+      href="{% url 'home' %}"
+    {% endif %}
+    
+    ><img class="logo_img" src={% static 'npoint_app/images/npoint_logo.png' %}> </a>
+
+    {% if user.is_authenticated %}
+      <!-- MOBILE: profile circle toggles the collapse -->
+      <button class="navbar-toggler p-0 border-0 d-md-none"
+              type="button" data-toggle="collapse" data-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="profile-pic profile-pic-sm"  >
+          <img {% if user.profile_picture and user.is_authenticated %}
+                src="{{ user.profile_picture.url }}"
+              {% else %}
+                src="{% static 'npoint_app/images/default_img.svg' %}"
+              {% endif %}    
+              class="rounded-circle" width="40" height="40">
+        </div>
+      </button>
+    {% else %}
+      <!-- MOBILE: keep hamburger for guests -->
+      <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    {% endif %}
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ml-auto align-items-md-left">
+        <ul class="navbar-nav d-flex align-items-left">
+        {% comment %} <li class="nav-item"><a href="{% url 'main' %}" class="nav-link">Dashboard</a></li> {% endcomment %}
+        <li class="nav-item"><a href="{% url 'main' %}" class="nav-link">API</a></li>
+        <li class="nav-item"><a href="{% url 'docs' %}" class="nav-link">Docs</a></li>
+        
+
+        {% if user.is_authenticated %}
+          <li class="nav-item my-2 my-md-0">
+            <a class="btn button-primary-custom ml-md-3" href="{% url 'json_form' %}">New JSON</a>
+          </li>
+
+          <!-- DESKTOP: keep profile dropdown -->
+          <li class="nav-item dropdown d-none d-md-block ml-md-3">
+            <a href="#" class="nav-link p-0 " id="profileDropdown"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="profile-pic">
+                <img {% if user.profile_picture and user.is_authenticated %}
+                src="{{ user.profile_picture.url }}"
+              {% else %}
+                src="{% static 'npoint_app/images/default_img.svg' %}"
+              {% endif %}    
+              class="rounded-circle" width="40" height="40">
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="{% url 'my_json_form' %}">Dashboard</a>
+              <a class="dropdown-item" href="{% url 'my_account' %}">My Profile</a>
+              <a class= "dropdown-item" href={% url 'password_setting' %}>Reset Password</a> 
+              <div class="dropdown-divider"></div> 
+              <form action="{% url 'logout' %}" method="POST" class="px-2">
+                {% csrf_token %}
+                <button class="dropdown-item text-danger d-flex align-item-center justify-content-center" type="submit">
+                  <span class="material-symbols-outlined mx-1">logout</span> Sign Out
+                </button>
+              </form>
+            </div>
+          </li>
+
+          <!-- MOBILE: Sign Out as a regular nav item in the list -->
+          <li class="nav-item d-md-none">
+            <form action="{% url 'logout' %}" method="POST" class="w-100">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-link nav-link text-danger pl-0 d-flex align-item-center justify-content-center">
+                <span class="material-symbols-outlined mr-1" style="vertical-align:middle">logout</span>
+                Sign Out
+              </button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item my-2 my-md-0">
+            <a href="{% url 'login' %}" class="btn button-secondary-custom mr-md-2 w-100">Log In</a>
+          </li>
+          <li class="nav-item my-2 my-md-0">
+            <a href="{% url 'register' %}" class="btn button-primary-custom ml-md-2 w-100">Sign Up</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="flex-grow-1">
+  {% block content %}
+  
+  {% endblock %}  
+  
+</main>
+
+  <footer class="footer " >
+  <div class="container text-center">
+    <div class="mb-3">
+      <a href="https://github.com/MrUzbek00">GitHub</a>
+      <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
+      <a href="{% url 'terms_of_service' %}">Terms of Service</a>
+    </div>
+    <small>&copy; 2025 JSON Manager. All rights reserved.</small>
+  </div>
+</footer>
+
+<!-- Toasts container (fixed, top-right) -->
+<div id="toast-container"
+     aria-live="polite" aria-atomic="true"
+     style="position:fixed; top:1rem; right:1rem; z-index:1080; min-width:280px;">
+  {% for message in messages %}
+    <div class="toast shadow mb-2" role="alert" aria-live="assertive" aria-atomic="true"
+         data-delay="4000" data-autohide="true"
+         data-tag="{{ message.tags|default:'info' }}">
+      <div class="toast-header">
+        <strong class="mr-auto">
+          {% if 'success' in message.tags %}Success
+          {% elif 'error' in message.tags %}Error
+          {% elif 'warning' in message.tags %}Warning
+          {% elif 'info' in message.tags %}Info
+          {% else %}Notice{% endif %}
+        </strong>
+        <small class="text-muted">now</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ message }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- Your toast initializer -->
+<script defer src="{% static 'npoint_app/js/messages.js' %}"></script>
+</body>
+</html>

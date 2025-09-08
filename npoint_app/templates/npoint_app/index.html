@@ -1,0 +1,106 @@
+  {% extends 'npoint_app/base.html' %}
+  {% include "npoint_app/_stats.html" %}
+  {% load static %}
+  {% block content %}
+
+</head>
+<body>
+
+<div class="d-flex flex-column">
+  <main class="flex-grow-1 py-5">
+    <div class="container text-center">
+      <h1 class="display-4 font-weight-black mb-3">Your JSON Data, Instantly API-Ready</h1>
+      <p class="lead font-inter mb-4">Effortlessly manage your JSON data with our intuitive platform. Create, edit, and access your data via a ready-made API in seconds. No coding required.</p>
+      <a href="{% url 'login' %}" class="btn button-primary-custom btn-lg">Start Now</a>
+    </div>
+
+    <div class="container mt-5" id="editor">
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="card card-custom p-4">
+            <h2 class="h4 font-weight-bold mb-3">Live JSON Editor</h2>
+            <textarea class="form-control font-fira-code mb-2" rows="10" placeholder='{ "message": "Hello, Npoint!" }'></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="card card-custom p-4">
+            <h2 class="h4 font-weight-bold mb-3">API Preview</h2>
+            <pre class="bg-dark text-white font-fira-code p-3 rounded" style="overflow-x: auto; min-height: 247px;">
+  <span style="color: var(--soft-yellow);">{</span>
+    <span style="color: var(--coral-red);">"message"</span>: <span style="color: var(--turquoise);">"Hello, Npoint!"</span>
+  <span style="color: var(--soft-yellow);">}</span>
+              </pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container text-center mt-5">
+      <h2 class="h2 font-weight-bold mb-4">Why Choose Npoint Uz?</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4" >
+          <div class="card card-custom reason-card p-4" >
+            <img src="{% static 'npoint_app/images/easy_to_use.jpeg' %}" class="rounded-circle mb-3"  width="100" alt="Easy to Use">
+            <h4>Easy to Use</h4>
+            <p class="font-inter text-muted">Intuitive interface for creating and editing JSON data.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4" >
+          <div class="card card-custom reason-card p-4">
+            <img src="{% static 'npoint_app/images/instant_api.jpeg' %}" class="rounded-circle mb-3" width="100" alt="Instant API">
+            <h4>Instant API</h4>
+            <p class="font-inter text-muted">Get a fully functional API endpoint for your JSON data as soon as you save it.</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card card-custom reason-card p-4">
+            <img src="{% static 'npoint_app/images/public_privat_control.jpeg' %}" class="rounded-circle mb-3" width="100" alt="Privacy">
+            <h4>Public/Private Controls</h4>
+            <p class="font-inter text-muted">Control who can access your data with options for public or private endpoints.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 text-white text-center p-5 rounded" style="background: linear-gradient(to right, var(--turquoise), var(--coral-red));">
+      <h2 class="h2 font-weight-black mb-3">Ready to Get Started?</h2>
+      <p class="font-inter mb-4">Sign up for free and start managing your JSON data in seconds. No credit card required.</p>
+      <a href="{% url 'register' %}" class="btn btn-light text-dark btn-lg mr-3">Sign Up Now</a>
+      <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg">Log In</a>
+    </div>
+  </main>
+</div>
+</body>
+<div class="container my-5 text-center">
+  <div class="h2 font-weight-bold mb-4" >Project Overall Stats</div>
+  <div class="row text-center">
+    
+    <!-- Users -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_users }}</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+    </div>
+
+    <!-- JSON Files -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_jsons }}</div>
+        <div class="stat-label">Total JSON Files</div>
+      </div>
+    </div>
+
+    <!-- API Calls -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_api_calls }}</div>
+        <div class="stat-label">Total API Calls</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

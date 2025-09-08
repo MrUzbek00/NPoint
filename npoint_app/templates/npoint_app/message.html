@@ -1,0 +1,25 @@
+{% extends 'npoint_app/base.html' %}
+{% load static %}
+{% block content %}
+   
+</head>
+<body>
+  <div class="d-flex flex-column">
+    <main class="flex-grow-1 py-5">
+      <div class="container">
+          <div class="card-custom text-center p-4">
+            {% for message %}
+            <h2 class="typography-h2 mt-3">Access Denied</h2>
+            <p class="typography-body mt-2 mb-4">
+              To see the Json file and get API please register or log in.
+            </p>
+            <a href="#" class="btn button-primary-custom">Go to Homepage</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+{% endblock %}
+

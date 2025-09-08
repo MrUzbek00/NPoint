@@ -1,0 +1,41 @@
+{% extends 'npoint_app/base.html' %}
+{% load static %}
+{% block content %}
+   
+</head>
+<body>
+  <form method="GET" >
+    {% csrf_token %}
+    <div class="d-flex flex-column">
+      <main class="flex-grow-1 py-5">
+        <div class="container">
+          <div class="mx-auto" style="max-width: 960px;">
+            <div class="card-custom mb-4 p-4">
+              <h2 class="typography-h2 mb-2">{{ json.title }}</h2>
+              <p class="typography-body mb-3">{{ json.description }}</p>
+              <pre class="bg-light p-3 rounded json-code text-sm" style="white-space:pre; overflow:auto;" ><code class="">{{ pretty_json }} </code></pre>
+              <div class="d-flex justify-content-between align-items-center">
+                        <p class="col-10 custom-placeholder mb-0 no-copy" >{{ json.json_api }}</p>
+                          <a href="#" class="btn button-primary-custom px-4">Copy</a>
+              </div>
+            </div>
+
+            {% comment %} <div class="card-custom text-center p-4">
+              <svg width="48" height="48" fill="none" stroke="red" viewBox="0 0 24 24">
+                <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+              </svg>
+              <h2 class="typography-h2 mt-3">Access Denied</h2>
+              <p class="typography-body mt-2 mb-4">
+                To see the Json file and get API please register or log in.
+              </p>
+              <a href="#" class="btn button-primary-custom">Go to Homepage</a>
+            </div> {% endcomment %}
+          </div>
+        </div>
+      </main>
+    </div>
+  </fom>
+</body>
+
+{% endblock %}
+

@@ -1,0 +1,354 @@
+{% extends 'npoint_app/base.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #333333;
+    }
+    .docs-section {
+      margin-bottom: 3rem;
+    }
+    .docs-section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: #333333;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .docs-list {
+      padding-left: 1.5rem;
+      list-style: disc;
+      color: #666666;
+    }
+    .docs-code-block {
+      background-color: #2d3748;
+      color: #ffffff;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.875rem;
+      position: relative;
+    }
+    .copy-button {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background-color: #4a5568;
+      color: #e2e8f0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .button-primary {
+      background-color: #32e2d6;
+      color: #fff;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+    }
+    .button-primary:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    {% comment %} <header class="d-flex justify-content-between align-items-center border-bottom py-3 px-4">
+      <div class="d-flex align-items-center">
+        <svg height="24" width="24" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="#32e2d6"></path>
+        </svg>
+        <h2 class="ml-2 font-weight-bold">Npoint Uz</h2>
+      </div>
+      <nav class="d-flex align-items-center">
+        <a class="mr-4 text-muted" href="#">Dashboard</a>
+        <a class="mr-4 text-dark font-weight-medium" href="#">Docs</a>
+        <a class="mr-4 text-muted" href="#">API</a>
+        <button class="button-primary mr-4">New JSON</button>
+        <div style="width: 40px; height: 40px; border-radius: 50%; background-size: cover; background-position: center; background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWIS9d2WbzmsnFDcFp8R95QOviwOJax3Lt6OGcs343LDGRUfid66RbIxrYy9-BD6Ok3ATyAMVHEWKtTPMM8zbZmnUE6lECd5X2okFeRldrE5pMySCckJ5S4qHr35SW9UKZoLHs1_A3p2WFEFn_8UtsQDfUS-5WvhZXM9PkhGWxARCYA3ZV3ajjdRvJrcXbNOlzHaDMP21qn_sJe3QyPPPSpRk-6088vU5OImoyZrBZF4qseT5PzCj5Po41A2kel07r-hB6KrlPtzk');"></div>
+      </nav>
+    </header> {% endcomment %}
+    <main class="container py-5">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="display-4 mb-4">📘 Npoint Uz Documentation</h1>
+        <p class="lead text-muted mb-5">
+          Welcome to the official Npoint Uz Docs — your guide to using JSON as an instant API! Whether you're a beginner developer looking to test your front-end app or someone who needs a quick mock API, Npoint Uz is here to help.
+        </p>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">🚀 What is Npoint Uz?</h2>
+          <ul class="docs-list">
+            <li>Create and save JSON documents in the browser.</li>
+            <li>Instantly generate a public or private API URL.</li>
+            <li>Use that URL in your projects just like any other REST API.</li>
+            <li>Share your mock API with others or keep it private.</li>
+          </ul>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">📝 How to Use the Platform</h2>
+          <h3 class="h5">1. Sign Up / Log In</h3>
+          <p class="text-muted">Create an account or log in to access your dashboard.</p>
+
+          <h3 class="h5 mt-4">2. Create a New JSON File</h3>
+          <ul class="docs-list">
+            <li>Click on “New JSON” or the “Create” button.</li>
+            <li>Give your document a title.</li>
+            <li>Enter your JSON data in the editor (we validate it in real-time).</li>
+            <li>Choose if you want it to be public or private.</li>
+            <li>Hit Save.</li>
+          </ul>
+
+          <h3 class="h5 mt-4">3. Access Your API URL</h3>
+          <p class="text-muted">After saving, you’ll get a special API endpoint:</p>
+          <div class="docs-code-block d-flex align-items-center justify-content-between">
+  <code id="api-url" class="mb-0 text-monospace h5">https://npoint.uz/api/username/document-name/document-id</code>
+  <button class="btn button-primary-custom ml-3 copy-btn" data-target="#api-url">Copy</button>
+</div>
+
+          <h3 class="h5 mt-4">4. Manage Your Files</h3>
+          <ul class="docs-list">
+            <li>Edit your JSON anytime.</li>
+            <li>Delete it if you no longer need it.</li>
+            <li>Copy the API URL to your clipboard.</li>
+            <li>Toggle visibility (make it public/private).</li>
+          </ul>
+
+          <h3 class="h5 mt-4">5. Public vs Private</h3>
+          <ul class="docs-list">
+            <li><strong>Public:</strong> Anyone with the link can view the JSON.</li>
+            <li><strong>Private:</strong> Only you (when logged in) can access it.</li>
+          </ul>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">🔒 Authentication & Security</h2>
+          <p class="text-muted">All changes to your JSON require login. Public documents are accessible by link, and token.</p>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">🛠️ Use Cases</h2>
+          <ul class="docs-list">
+            <li>Frontend apps during development</li>
+            <li>Mocking APIs for demos</li>
+            <li>JSON hosting for testing libraries and frameworks</li>
+            <li>Sharing structured data with teammates</li>
+          </ul>
+        </section>
+
+        <section class="docs-section">
+          <h2 class="docs-section-title">📬 Example API Response</h2>
+          {% comment %} <p class="text-muted">Example usage in JavaScript:</p>
+          <div class="docs-code-block">
+            <button class="copy-button">Copy</button>
+            <code>
+fetch("https://npoint.uz/api/johndoe/todolist")
+  .then(res => res.json())
+  .then(data => console.log(data));
+            </code>
+          </div> {% endcomment %}
+          <!-- ===== API Examples (Bootstrap 4 tabs) ===== -->
+          <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <strong>API Examples</strong>
+              <small class="text-muted">All requests include: <code>Authorization: Token YOUR_TOKEN</code></small>
+            </div>
+
+            <div class="card-body">
+              <!-- Tabs -->
+              <ul class="nav nav-pills mb-3" id="apiExamplesTabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="tab-js"   data-toggle="tab" href="#pane-js"   role="tab">JavaScript</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-py"   data-toggle="tab" href="#pane-py"   role="tab">Python</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-curl" data-toggle="tab" href="#pane-curl" role="tab">cURL</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-php"  data-toggle="tab" href="#pane-php"  role="tab">PHP</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-node" data-toggle="tab" href="#pane-node" role="tab">Node.js</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-java" data-toggle="tab" href="#pane-java" role="tab">Java</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-go"   data-toggle="tab" href="#pane-go"   role="tab">Go</a></li>
+                <li class="nav-item"><a class="nav-link"        id="tab-rb"   data-toggle="tab" href="#pane-rb"   role="tab">Ruby</a></li>
+              </ul>
+
+              <!-- Panes -->
+              <div class="tab-content">
+
+                <!-- JavaScript -->
+                <div class="tab-pane fade show active" id="pane-js" role="tabpanel" aria-labelledby="tab-js">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0; top:0" data-target="#code-js">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-js">
+          // Browser fetch
+          const url = "https://npoint.uz/api/johndoe/todolist/id";
+
+          fetch(url, {
+            headers: { "Authorization": "Token YOUR_TOKEN", "Accept": "application/json" }
+          })
+            .then(res => {
+              if (!res.ok) throw new Error(res.status + " " + res.statusText);
+              return res.json();
+            })
+            .then(data => console.log(data))
+            .catch(console.error);
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- Python -->
+                <div class="tab-pane fade" id="pane-py" role="tabpanel" aria-labelledby="tab-py">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-py">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-py">import requests
+
+          url = "https://npoint.uz/api/johndoe/todolist/id"
+          headers = {"Authorization": "Token YOUR_TOKEN", "Accept": "application/json"}
+
+          resp = requests.get(url, headers=headers, timeout=15)
+          resp.raise_for_status()
+          print(resp.json())
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- cURL -->
+                <div class="tab-pane fade" id="pane-curl" role="tabpanel" aria-labelledby="tab-curl">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-curl">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-curl">curl -H "Authorization: Token YOUR_TOKEN" \
+              -H "Accept: application/json" \
+              https://npoint.uz/api/johndoe/todolist/id
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- PHP -->
+                <div class="tab-pane fade" id="pane-php" role="tabpanel" aria-labelledby="tab-php">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-php">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-php">&lt;?php
+          $ch = curl_init("https://npoint.uz/api/johndoe/todolist/id");
+          curl_setopt_array($ch, [
+            CURLOPT_HTTPHEADER => ["Authorization: Token YOUR_TOKEN", "Accept: application/json"],
+            CURLOPT_RETURNTRANSFER => true,
+          ]);
+          $resp = curl_exec($ch);
+          if (curl_errno($ch)) { throw new Exception(curl_error($ch)); }
+          $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+          curl_close($ch);
+          if ($status !== 200) { throw new Exception("HTTP $status"); }
+          echo $resp;
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- Node.js -->
+                <div class="tab-pane fade" id="pane-node" role="tabpanel" aria-labelledby="tab-node">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-node">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-node">const axios = require("axios");
+          const url = "https://npoint.uz/api/johndoe/todolist/id";
+
+          axios.get(url, { headers: { Authorization: "Token YOUR_TOKEN" } })
+            .then(res => console.log(res.data))
+            .catch(err => console.error(err.response ? err.response.status : err.message));
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- Java -->
+                <div class="tab-pane fade" id="pane-java" role="tabpanel" aria-labelledby="tab-java">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-java">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-java">import java.net.http.*;
+          import java.net.URI;
+
+          public class Example {
+            public static void main(String[] args) throws Exception {
+              String url = "https://npoint.uz/api/johndoe/todolist/id";
+              HttpClient client = HttpClient.newHttpClient();
+              HttpRequest req = HttpRequest.newBuilder(URI.create(url))
+                  .header("Authorization", "Token YOUR_TOKEN")
+                  .header("Accept", "application/json")
+                  .build();
+              HttpResponse&lt;String&gt; res = client.send(req, HttpResponse.BodyHandlers.ofString());
+              System.out.println(res.body());
+            }
+          }
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- Go -->
+                <div class="tab-pane fade" id="pane-go" role="tabpanel" aria-labelledby="tab-go">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-go">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-go">package main
+
+          import (
+            "fmt"
+            "io"
+            "net/http"
+          )
+
+          func main() {
+            req, _ := http.NewRequest("GET", "https://npoint.uz/api/johndoe/todolist/id", nil)
+            req.Header.Set("Authorization", "Token YOUR_TOKEN")
+            req.Header.Set("Accept", "application/json")
+
+            res, err := http.DefaultClient.Do(req)
+            if err != nil { panic(err) }
+            defer res.Body.Close()
+            body, _ := io.ReadAll(res.Body)
+            fmt.Println(string(body))
+          }
+          </code></pre>
+                  </div>
+                </div>
+
+                <!-- Ruby -->
+                <div class="tab-pane fade" id="pane-rb" role="tabpanel" aria-labelledby="tab-rb">
+                  <div class="position-relative">
+                    <button class="btn btn-sm button-primary-custom copy-btn position-absolute" style="right:0;top:0" data-target="#code-rb">Copy</button>
+          <pre class="bg-light p-3 rounded mb-0"><code id="code-rb">require "net/http"
+          require "json"
+
+          uri = URI("https://npoint.uz/api/johndoe/todolist/id")
+          req = Net::HTTP::Get.new(uri)
+          req["Authorization"] = "Token YOUR_TOKEN"
+          req["Accept"] = "application/json"
+
+          res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+          puts JSON.pretty_generate(JSON.parse(res.body))
+          </code></pre>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Copy button helper (works with Bootstrap 4; requires jQuery already on page) -->
+          <script>
+            document.addEventListener("click", function (e) {
+              if (!e.target.closest(".copy-btn")) return;
+              const btn = e.target.closest(".copy-btn");
+              const targetSel = btn.getAttribute("data-target");
+              const el = document.querySelector(targetSel);
+              if (!el) return;
+
+              const text = el.innerText;
+              navigator.clipboard.writeText(text).then(() => {
+                const old = btn.textContent;
+                btn.textContent = "Copied!";
+                setTimeout(() => (btn.textContent = old), 1200);
+              });
+            });
+          </script>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+{% endblock %}

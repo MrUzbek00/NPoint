@@ -1,0 +1,419 @@
+/* :root {
+      --turquoise: #4ecdc4;
+      --soft-yellow: #ffe66d;
+      --coral-red: #ff6b6b;
+      --deep-teal: #1a535c;
+      --background-color: #f8f9fa;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--deep-teal);
+    }
+    .font-inter {
+      font-family: 'Inter', sans-serif;
+    }
+    .font-fira-code {
+      font-family: 'Fira Code', monospace;
+    }
+    .card-custom {
+      border-radius: 1rem;
+      box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .card-custom:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+    }
+    .btn-primary-custom {
+      background-color: var(--turquoise);
+      color: white;
+    }
+    .btn-primary-custom:hover {
+      background-color: #3bbdb5;
+    }
+    .btn-secondary-custom {
+      background-color: #e2e6ea;
+      color: var(--deep-teal);
+    }
+    .btn-secondary-custom:hover {
+      background-color: #d6d8db;
+    } */
+
+    :root{
+      --turquoise: #4ecdc4;
+      --soft-yellow: #ffe66d;
+      --coral-red: #ff6b6b;
+      --deep-teal: #1a535c;
+      --background-color: #f9f9f9;
+      --text-primary: #1a535c;
+      --text-secondary: #5a7f84;
+      --brand: #4ecdc4;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    html, body {
+    height: 100%;
+    margin: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9; 
+      color: #333333;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+    }
+    
+    .button-primary-custom {
+      background-color: var(--turquoise); 
+      color: white;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid transparent;
+    }
+    .button-primary:hover {
+      opacity: 0.9;
+    }
+
+
+    .button-secondary-custom {
+      background-color: #e2e6ea;
+      color: var(--deep-teal);
+      padding: 0.5rem 1rem;
+    }
+    .button-secondary-custom:hover {
+      background-color: #d6d8db;
+    }
+
+
+
+    .card-custom {
+      border-radius: 1rem;
+      box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+      transition: all 0.3s ease-in-out;
+    }
+    .card-custom:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
+    }
+    .reason-card{
+        min-height: 250px;
+    }
+
+
+    /* DAshboard card icon delete & edit */
+    /* .cards-icon-custom{
+        border: 1px solid black;
+        padding: 5px;
+         border-radius: 50%;
+    } */
+    .cards-icon-custom:hover {
+        border : 1px solid transparent;
+        border-radius: 50%;
+        background-color: var(--turquoise);
+        color: black !important;
+        padding: 5px;
+    }
+  .profile-custom{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+.logo_img{
+  height: 45px;
+  width: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/* responsive image frame */
+.thumb{
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* keeps a nice ratio on any screen */
+  overflow: hidden;
+  border-radius: 12px;
+  background:#f5f5f7;
+}
+.thumb > img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;       /* fills and crops, no stretching */
+  object-position: center; /* keeps subject centered */
+}
+
+
+
+.pagination li.page-item-custom .page-link {
+  border: 1px solid transparent;   /* or transparent / any color */
+  border-radius: 50%;         /* pill shape */
+  background-color: #e2e6ea;
+  color: #fff;
+}
+.pagination li.page-item-custom.active .page-link {
+  background: var(--turquoise);
+  border-color: var(--turquoise);
+  color: #fff;
+}
+.pagination li.page-item-custom .page-link:hover {
+  background-color: var(--turquoise);
+  color:#1a535c
+}
+
+.sign-out{
+  color: var(--coral-red);
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Json_viewer */
+.json-code {
+      font-family: 'Fira Code', monospace;
+      background-color: #f0f2f4 !important;
+    }
+
+.custom-placeholder{
+  background-color: #e0e0e0 ;
+  color: #637488;
+  padding: 0.5rem 1rem;
+  font-size: 1.0rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+
+}
+
+pre code {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
+}
+
+.no-copy {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
+}
+
+
+/* Json Form css togle */
+/* Genel stil */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+  margin: 10px;
+}
+
+/* Giriş stil */
+.toggle-switch .toggle-input {
+  display: none;
+}
+
+/* Anahtarın stilinin etrafındaki etiketin stil */
+.toggle-switch .toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Anahtarın yuvarlak kısmının stil */
+.toggle-switch .toggle-label::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+}
+
+/* Anahtarın etkin hale gelmesindeki stil değişiklikleri */
+.toggle-switch .toggle-input:checked + .toggle-label {
+  background-color:  var(--turquoise);
+}
+
+.toggle-switch .toggle-input:checked + .toggle-label::before {
+  transform: translateX(16px);
+}
+
+/* Light tema */
+.toggle-switch.light .toggle-label {
+  background-color: #BEBEBE;
+}
+
+.toggle-switch.light .toggle-input:checked + .toggle-label {
+  background-color: #9B9B9B;
+}
+
+.toggle-switch.light .toggle-input:checked + .toggle-label::before {
+  transform: translateX(6px);
+}
+
+/* Dark tema */
+.toggle-switch.dark .toggle-label {
+  background-color: #4B4B4B;
+}
+
+.toggle-switch.dark .toggle-input:checked + .toggle-label {
+  background-color: #717171;
+}
+
+.toggle-switch.dark .toggle-input:checked + .toggle-label::before {
+  transform: translateX(16px);
+}
+
+/* Json Form toggle css end */
+/*Json INput Title */
+.input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      background-color: #edf2f7;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.5);
+    }
+
+
+
+/* Optional: make your custom button use the same token */
+.button-primary-custom{
+  background-color: var(--brand) !important;
+  border-color: var(--brand) !important;
+}
+
+/* ===== Stat card ===== */
+.stat-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      background: #38d9a9;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #212529;
+    }
+    .stat-label {
+      font-size: 0.95rem;
+      color: #6c757d;
+      margin-top: 0.25rem;
+    }
+
+/* Helpers for gutters on md+ only (keeps nice spacing) */
+@media (min-width: 768px){
+  .no-gutters-md > [class*="col-"] { padding-left: 0; padding-right: 0; }
+}
+
+    .footer {
+      background-color: var(--deep-teal);
+      color: white;
+      padding: 2rem 0;
+    }
+    .footer a {
+      color: var(--turquoise);
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+    .footer a:hover {
+      color: var(--soft-yellow);
+    }
+    .footer small {
+      color: var(--turquoise);
+      opacity: 0.8;
+      font-family: 'Inter', sans-serif;
+    }
+
+
+/* unify container width on desktop */
+@media (max-width: 425px){
+  .container { max-width: 100%; padding-left: 1rem; padding-right: 1rem; }
+  
+  .logo_img{
+  height: 35px;
+  width: auto;
+}
+}
+
+@media (min-width: 1200px) {
+  .container { max-width: 1200px; }   /* navbar and sections now align */
+}
+
+@media (max-width: 575.98px){
+  .card-custom { padding: 16px; }
+  
+  .profile-custom{
+    width: 50px;
+    height: 50px;
+  }
+
+
+
+  .button-primary-custom-mb {
+      font-size: large;
+      text-align: center;
+      width: 8rem;
+      padding: 0.8rem 0.8rem;
+      border: 1px solid transparent;
+    }
+
+
+
+
+}

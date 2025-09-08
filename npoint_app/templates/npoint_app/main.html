@@ -1,0 +1,160 @@
+{% extends 'npoint_app/base.html' %}
+{% include "npoint_app/_stats.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+  <div class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1 py-5">
+      <div class="container w-100" >
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <div class="text-center text-md-left">
+            <h2 class="h3 font-weight-bold">JSON Documents</h2>
+            <p class="text-muted font-inter">Manage and organize your JSON files with ease.</p>
+          </div>
+          <a href="{% url 'json_form' %}" class="btn button-primary-custom mt-3 mt-md-0">Create New JSON</a>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-4 mb-5">
+          <div class="row ">
+            <div class="d-flex col-12 mb-3 mb-md-0">
+              <form method="get" class="form-row w-100 align-items-center">
+                 
+                  <div class="col">
+                    <input type="text" name="q" class="form-control" placeholder="Search…" value="{{ q }}">
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn button-primary-custom ml-2" type="submit">Search</button>
+                  </div>
+                </form>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Card Template -->
+          {% for json in json_files %}
+          <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4 " >
+            <div class="card-custom  py-3 px-3 bg-white position-relative" style="height: 100%;">
+              <div class="thumb bg-warning rounded-lg overflow-hidden d-flex align-items-center justify-content-center mb-3">
+                <img 
+                  {% if json.json_picture %}
+                  src="{{ json.json_picture.url }}"
+                  {% else %}
+                  src="{% static 'npoint_app/images/default_json.png'  %}" 
+                  {% endif %}
+                  alt="JSON Icon" width="298" height="170" class=" rounded-lg object-fit-contain w-100 " > 
+              </div>
+              <h5 class="font-weight-bold mb-1" ><a href="{% url 'json_viewer' json.user.username json.slug json.pk %}">
+    {{ json.title|truncatewords:4 }}</a></h5> 
+              <span class="badge badge-success">
+                {% if json.is_public %} Public {% endif %}
+              </span>
+              <div style="height: 50px;">{{ json.description|default_if_none:""|truncatewords:5 }}</div>
+              <p class="text-muted font-inter small mb-2">Last updated: {{json.updated_at |date:"d M Y" }} </p>
+              <div class=" d-flex justify-content-between mt-3">
+                <div class="col-6 d-flex align-items-center p-0">
+                  <img {% if json.user.profile_picture %}
+                  src="{{ json.user.profile_picture.url }}"
+                    {% else %}
+                      src="{% static 'npoint_app/images/default_img.svg' %}"
+                    {% endif %}    
+                    class=" profile-custom" >
+                      <span class="ml-2 align-self-center">{{ json.user.username }}</span>
+                  </div>
+                  <a href="" class="icon-btn button-primary-custom button-primary-custom-mb" onclick="navigator.clipboard.writeText('{{ json.json_api }}')">Copy<svg width="25" height="25" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101M10.172 15.071a4 4 0 005.656-5.656l-4-4a4 4 0 00-5.656 5.656l1.102 1.101"/></svg></a>
+                
+                  
+                </div>
+            </div>
+          </div>
+          {% empty %}
+            <p>No JSON files found. <a href="{% url 'json_form' %}">Create one now!</a></p>
+          {% endfor %}
+          <!-- End Card Template -->
+        </div>
+
+
+
+
+        
+        <nav class="mt-5 d-flex justify-content-center">
+
+          <ul class="pagination">
+            {# Prev #}
+            {% if json_files.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ json_files.previous_page_number }}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {# Page Numbers #}
+            {% for num in json_files.paginator.page_range %}
+              {% if json_files.number == num %}
+                <li class="page-item page-item-custom active mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif num > json_files.number|add:'-3' and num < json_files.number|add:'3' %}
+                <li class="page-item page-item-custom mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif num == 1 or num == json_files.paginator.num_pages %}
+                <li class="page-item page-item-custom mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif forloop.first or forloop.last %}
+                <li class="page-item page-item-custom disabled mx-2"><span class="page-link">...</span></li>
+              {% endif %}
+            {% endfor %}
+            {# Next #}
+              {% if json_files.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ json_files.next_page_number }}">&raquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+              {% endif %}
+          
+            {% comment %} <li class="page-item disabled mx-1 "><a class="page-link" href="#">&laquo;</a></li>
+            <li class="page-item page-item-custom active mx-2"><a class="page-link" href="#">1</a></li>
+            <li class="page-item page-item-custom mx-2"><a class="page-link" href="#">2</a></li>
+            <li class="page-item page-item-custom mx-2"><a class="page-link" href="#">3</a></li>
+            <li class="page-item page-item-custom disabled mx-2"><span class="page-link">...</span></li>
+            <li class="page-item page-item-custom mx-2"><a class="page-link" href="#">8</a></li>
+            <li class="page-item mx-2"><a class="page-link" href="#">&raquo;</a></li> {% endcomment %}
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+</body>
+<div class="container my-5 text-center">
+  <div class="h2 font-weight-bold mb-4" >Project Overall Stats</div>
+  <div class="row text-center">
+    
+    <!-- Users -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_users }}</div>
+        <div class="stat-label">Total Users</div>
+      </div>
+    </div>
+
+    <!-- JSON Files -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_jsons }}</div>
+        <div class="stat-label">Total JSON Files</div>
+      </div>
+    </div>
+
+    <!-- API Calls -->
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
+      <div class="stat-card">
+        
+        <div class="stat-value">{{ total_api_calls }}</div>
+        <div class="stat-label">Total API Calls</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

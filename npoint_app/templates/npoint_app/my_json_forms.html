@@ -1,0 +1,126 @@
+{% extends 'npoint_app/base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+  <div class="d-flex flex-column min-vh-100">
+
+    <main class="flex-grow-1 py-5">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+          <div>
+            <h2 class="h3 font-weight-bold">My JSON Documents</h2>
+            <p class="text-muted font-inter">Manage and organize your JSON files with ease.</p>
+          </div>
+          <a href="{% url 'json_form' %}" class="btn button-primary-custom mt-3 mt-md-0">Create New JSON</a>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-4 mb-5">
+          <div class="row">
+            <div class="d-flex col-12 mb-3 mb-md-0">
+              <form method="get" class="form-row w-100 align-items-center">
+                 
+                  <div class="col">
+                    <input type="text" name="q" class="form-control" placeholder="Search…" value="{{ q }}">
+                  </div>
+                  <div class="col-auto">
+                    <button class="btn button-primary-custom ml-2" type="submit">Search</button>
+                  </div>
+                </form>
+            </div>
+            {% comment %} <div class="col-md-6">
+              <select class="form-control">
+                <option selected>Filter by visibility</option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+            </div> {% endcomment %}
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Card Template -->
+           {% for json in json_forms %}
+          <div class="col-sm-6 col-lg-4 col-xl-3 mb-4 ">
+            <div class="card-custom  pt-5 pb-3 px-3 bg-white position-relative" style="height: 100%;">
+              <div class="position-absolute" style="top: 10px; right: 10px;">
+                <a href="{% url 'edit_json_form' json.slug json.pk %}" class="icon-btn cards-icon-custom mr-2"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536M16.732 3.732a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg></a>
+                <form action="{% url 'delete_json_form' json.pk %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <a type="submit" href="{% url 'delete_json_form' json.pk %}" class="icon-btn cards-icon-custom text-danger"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4H9v3M4 7h16"/></svg></a>
+                </form>  
+              </div>
+              <div class="thumb bg-warning rounded-lg overflow-hidden d-flex align-items-center justify-content-center mb-3">
+                <img 
+                  {% if json.json_picture %}
+                  src="{{ json.json_picture.url }}"
+                  {% else %}
+                  src="{% static 'npoint_app/images/default_json.png'  %}" 
+                  {% endif %}
+                  alt="JSON Icon" width="298" height="170" class=" rounded-lg object-fit-contain w-100 " > 
+              </div>
+              <h5 class="font-weight-bold mb-1" ><a href="{% url 'json_viewer' json.user.username json.slug json.pk %}">{{ json.title|truncatewords:4 }}</a></h5>
+              <!--<h5 class="font-weight-bold mb-1"><a href="{% url 'json_viewer' json.user.username json.slug json.pk %}">{{ json.title }}</a></h5>-->
+              {% if json.is_public %}
+              <span class="badge badge-success">Public</span>
+              {% else %}
+              <span class="badge badge-danger">Private</span>
+              {% endif %}
+              <div style="height:50px" >{{ json.description|default_if_none:""|truncatewords:5 }}</div>
+              <p class="text-muted font-inter small mb-2">Last updated: {{json.updated_at |date:"d M Y" }} </p>
+              <div class=" d-flex justify-content-between mt-3">
+                <div class="col-6 d-flex align-items-center p-0">
+                  <img {% if user.profile_picture and user.is_authenticated %}
+                  src="{{ user.profile_picture.url }}"
+                    {% else %}
+                      src="{% static 'npoint_app/images/default_img.svg' %}"
+                    {% endif %}    
+                    class="rounded-circle" width="40" height="40">
+                      <span class="ml-2 align-self-center">{{ user.username }}</span>
+                </div>
+                  <a href="#" class="icon-btn button-primary-custom">Copy<svg width="25" height="25" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101M10.172 15.071a4 4 0 005.656-5.656l-4-4a4 4 0 00-5.656 5.656l1.102 1.101"/></svg></a>
+              </div>  
+            </div>
+          </div>
+          {% empty %}
+            <p>No JSON files found. <a href="{% url 'json_form' %}">Create one now!</a></p>
+          {% endfor %}
+        </div>
+
+        <nav class="mt-5 d-flex justify-content-center">
+          <ul class="pagination">
+            {# Prev #}
+            {% if json_forms.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ json_forms.previous_page_number }}">&laquo;</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {# Page Numbers #}
+            {% for num in json_forms.paginator.page_range %}
+              {% if json_forms.number == num %}
+                <li class="page-item page-item-custom active mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif num > json_forms.number|add:'-3' and num < json_forms.number|add:'3' %}
+                <li class="page-item page-item-custom mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif num == 1 or num == json_forms.paginator.num_pages %}
+                <li class="page-item page-item-custom mx-2"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+              {% elif forloop.first or forloop.last %}
+                <li class="page-item page-item-custom disabled mx-2"><span class="page-link">...</span></li>
+              {% endif %}
+            {% endfor %}
+            {# Next #}
+              {% if json_forms.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ json_forms.next_page_number }}">&raquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+              {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+</body>
+{% endblock %}

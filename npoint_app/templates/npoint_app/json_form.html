@@ -1,0 +1,162 @@
+{% extends "npoint_app/base.html" %}
+{% load static %}
+{% block content %}
+
+<form method="POST" action="{% url 'json_form' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+
+  <div class="container d-flex align-items-center justify-content-center py-5">
+    <div class="w-100" style="max-width: 960px;">
+      <div class="card card-custom shadow border-0 p-4 p-md-5" style="min-height: 960px;">
+
+        
+        <!-- Title + Visibility -->
+        <div class="form-row align-items-center mb-4">
+          
+          <div class="col-md-8">
+            <h1 class="h2 font-weight-bold mb-0">Create / Edit JSON</h1>
+            <p class="text-muted mb-0">Use the form below to create or edit your JSON data.</p>
+          </div>
+          <div class="form-group d-flex align-items-center mb-4">
+            <img
+              {% if user.is_authenticated and form.instance.json_picture %}
+                src="{{ form.instance.json_picture.url }}"
+              {% else %}
+                src="{% static 'npoint_app/images/default_json.png' %}"
+              {% endif %}
+              class="border mr-3"
+              width="250"
+              height="150"
+              alt="JSON cover"
+
+            >
+            <div>
+              <input
+                type="file"
+                id="imageUpload"
+                name="json_picture"
+                accept="image/*"
+                class=""
+              >
+              {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+              {% endif %}
+              <p class="mb-0 mt-1 small text-muted">JPG, or PNG. 1MB max.</p>
+            </div>
+          </div>
+
+          <div class="form-group col-md-8 mb-3 mb-md-0">
+            <label for="title" class="h3 font-weight-bold mb-2">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              class="input form-control form-control-lg json-editor"
+              placeholder="My Awesome JSON"
+              value="{{ form.title.value|default_if_none:'' }}"
+              required
+            >
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
+          </div>
+
+          <div class="form-group col-md-4 d-flex align-items-center justify-content-md-end">
+            <span class="h5 text-muted mb-0">Private</span>
+            <div class="toggle-switch mx-3">
+              <input
+                class="toggle-input"
+                id="toggle"
+                type="checkbox"
+                name="is_public"
+                {% if form.is_public.value %}checked{% endif %}
+              >
+              <label class="toggle-label" for="toggle"></label>
+            </div>
+            <span class="h5 font-weight-bold text-deep-teal mb-0">Public</span>
+          </div>
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- Description -->
+        <div class="form-group mb-4 px-0">
+          <label for="description" class="h5 font-weight-bold mb-2">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            class="input form-control form-control-lg json-editor"
+            rows="4"
+            placeholder="A short description of your JSON..."
+          >{{ form.description.value|default_if_none:'' }}</textarea>
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- JSON Editor -->
+        <div class="form-group mb-4">
+          <label for="json-editor" class="h5 font-weight-bold mb-2">JSON Editor</label>
+          <textarea
+            id="json-editor"
+            name="json_content"
+            class="form-control json-editor json-code"
+            rows="25"
+            placeholder='{ 
+"hello": "world", 
+"isFun": true, 
+"features": [ "syntax highlighting", 
+              "auto-formatting" ] 
+}'
+            required
+          >{% if form.json_content.value != "null" %}
+              {{ form.json_content.value }}
+            {% else %}
+{ 
+"example": "This is an example JSON. Replace it with your own JSON data.",
+"hello": "world", 
+"isFun": true, 
+"features": [ "syntax highlighting", 
+              "auto-formatting" ] 
+}
+            {% endif %}
+              </textarea>
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+        </div>
+
+        <!-- API + Actions -->
+        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between">
+          <div class="bg-light rounded p-3 w-75 w-md-auto flex-grow-1 mr-md-3 mb-3 mb-md-0">
+            <p class="mb-1 small text-muted">API URL:</p>
+            <p class="mb-0 text-monospace text-truncate text-dark no-copy">
+              {{ json_data.json_api }}
+            </p>
+          </div>
+
+          <div class="d-flex w-25 justify-content-between justify-content-md-end">
+            <button type="button" class="btn button-secondary-custom mr-2 w-100 w-md-auto"
+                    onclick="navigator.clipboard.writeText('{{ json_api }}')">
+              Copy
+            </button>
+            <button type="submit" class="btn button-primary-custom w-100 w-md-auto">
+              Save
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+ 
+
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+{% endblock %}

@@ -1,0 +1,176 @@
+  {% extends 'npoint_app/base.html' %}
+{% load static %}
+{% block content %}
+  <style>
+    :root {
+      --primary-color: #4ecdc4;
+      --deep-teal: #1a535c;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: var(--deep-teal);
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-primary-custom {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+    }
+    .btn-danger-custom {
+      background-color: #dc3545;
+      color: white;
+      font-weight: 600;
+    }
+    .text-deep-teal {
+      color: var(--deep-teal);
+    }
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(78, 205, 196, 0.25);
+    }
+  </style>
+<body>
+  <div class="d-flex flex-column ">
+  
+    <main class="flex-grow-1 py-5">
+      <div class="container">
+        <h2 class="mb-4 h3 font-weight-bold text-deep-teal">Account Settings</h2>
+
+        <!-- Profile -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h4 class="h5">Profile</h4>
+            <p class="text-muted">This information will be displayed publicly so be careful what you share.</p>
+            
+            <form method="POST" enctype="multipart/form-data" action="{% url 'my_account' %}">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="profile">
+              <div class="d-flex align-items-center mb-4">
+                      <img {% if user.profile_picture and user.is_authenticated %}
+                            src="{{ user.profile_picture.url }}"
+                          {% else %}
+                            src="{% static 'npoint_app/images/default_img.svg' %}"
+                          {% endif %}    
+                          class="rounded-circle mr-3" width="72" height="72">
+              <div>
+                <input class="btn" type="file" id="imageUpload" name="profile_picture" accept="image/*" value="Change Profile Picture">
+                <p class="mb-0 mt-1 small text-muted">JPG, GIF or PNG. 1MB max.</p>
+              </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="first_name">First Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="first_name" 
+                    name="first_name"
+                    {% if user.first_name %} value="{{ user.first_name }}" {% endif %}
+                    placeholder="Jane Doe" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="last_name">Last Name</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="last_name"
+                    name="last_name" 
+                    {% if user.last_name %} value="{{ user.last_name }}" {% endif %}
+                    placeholder="Jane Doe"
+                    required
+                    >
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="Username">Username</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="user_name" 
+                    name="username"
+                    {% if user.username %} value="{{ user.username }}" {% endif %}
+                    placeholder="Jane Doe"
+                    required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="email">Email address</label>
+                  <input 
+                    type="email" 
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required
+                    {% if user.email %} value="{{ user.email }}" {% endif %}
+                    placeholder="jane.doe@example.com">
+                </div>
+              </div>
+              
+              <div class="text-right">
+                <button type="submit" class="btn btn-primary-custom">Save Changes</button>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+              <h4 class="h5">API Token</h4>
+              <p class="text-muted">Use this token to authenticate API requests.</p>
+
+              {% if latest_api_token %}
+                <div class="alert alert-warning">
+                  <strong>Your new token:</strong>
+                  <code id="token">{{ latest_api_token }}</code>
+                  <button class="btn button-primary-custom ml-2"
+                              onclick="navigator.clipboard.writeText(document.getElementById('token').textContent)">
+                        Copy
+                      </button>
+                  <small class="d-block mt-2">You won’t see this token again—store it securely.</small>
+                </div>
+                {% comment %} <div class="text-right" > 
+                    <button class="btn button-primary-custom ml-2"
+                              onclick="navigator.clipboard.writeText(document.getElementById('token').textContent)">
+                        Copy
+                      </button>
+                    </div> {% endcomment %}
+                {% comment %} Clear after showing once {% endcomment %}
+                {% with request.session.latest_api_token as _ %}{% endwith %}
+                
+              {% else %}
+                <div class="d-flex align-items-center">
+                  <code class="mr-3">{{ api_token_masked }}</code>
+                  <form method="post" action="{% url 'regenerate_token' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn button-primary-custom">Regenerate</button>
+                  </form>
+                </div>
+              {% endif %}
+
+              <hr>
+              <p class="mb-1 small text-muted">HTTP header to use:</p>
+              <pre class="mb-0"><code>Authorization: Token &lt;YOUR_TOKEN&gt;</code></pre>
+            </div>
+          </div>
+        <!-- Delete Account -->
+        <div class="card">
+          <div class="card-body">
+            <h4 class="h5 text-danger">Delete Account</h4>
+            <p class="text-muted">Permanently remove your account and all of its content. This action is not reversible, so please continue with caution.</p>
+            <div class="text-right">
+              <form method="POST" action="{% url 'my_account' %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="delete">
+                <div class="text-right">
+                  <button type="submit" class="btn btn-danger-custom">Delete My Account</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+{% endblock %}
