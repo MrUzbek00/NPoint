@@ -69,6 +69,7 @@ It is built with **Django + Django REST Framework**, styled with **Bootstrap 4**
 # Clone repo
 git clone https://github.com/your-username/npoint-uz.git
 cd npoint-uz
+'''
 
 # Setup venv
 python -m venv venv
