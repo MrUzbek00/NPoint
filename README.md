@@ -92,7 +92,7 @@ python manage.py createsuperuser
 # Start server
 python manage.py runserver
 ```
-##🔑 API Usage
+## **🔑 API Usage**
 Authentication
 Authorization: Token <your_api_token>
 
@@ -114,17 +114,17 @@ res = requests.get(url, headers=headers)
 print(res.json())
 ```
 ---
-📊 Statistics
+## **📊 Statistics**
 -The system tracks:
 
-  -Total Users
+  - Total Users
 
-  -Total JSON Files
+  - Total JSON Files
 
-  -API Calls (incremented per request)
+  - API Calls (incremented per request)
 ---
 ⚙️ Project Structure
-swift
+```swift
 Copy code
 npoint_project/
 ├── npoint_app/
@@ -139,20 +139,21 @@ npoint_project/
 │   ├── json_grid.png
 │   └── api_example.png
 └── manage.py
+```
 ---
 
-🔒 Privacy Policy
+## **🔒 Privacy Policy**
 -By using Npoint Uz, you agree that:
 
-  -JSON content belongs to you
+  - JSON content belongs to you
 
-  -Public APIs are open access
+  - Public APIs are open access
 
-  -Tokens are your responsibility
+  - Tokens are your responsibility
 
 **See Privacy Policy for details.**
 ---
-🤝 Contributing
+## **🤝 Contributing**
 We welcome contributions from the community!
 
 To contribute:
@@ -177,11 +178,11 @@ git push origin feature/your-feature-name
 ```
 Open a Pull Request describing your changes
 
--Please follow best practices:
+- Please follow best practices:
 
--Keep code clean and readable
+- Keep code clean and readable
 
--Add comments where necessary
+- Add comments where necessary
 
 **Update documentation if you add/change features**
 
