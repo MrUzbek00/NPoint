@@ -1,4 +1,6 @@
-![NPoint](./npoint_app/static/npoint_app/images/npoint_logo.png)
+<p align="center">
+  <img src="./npoint_app/static/npoint_app/images/npoint_logo.png" alt="NPoint" width="250"/>
+</p>
 # Npoint Uz
 
 [![Django](https://img.shields.io/badge/Django-5.0-green?logo=django)](https://www.djangoproject.com/)
