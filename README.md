@@ -69,37 +69,42 @@ It is built with **Django + Django REST Framework**, styled with **Bootstrap 4**
 # Clone repo
 git clone https://github.com/your-username/npoint-uz.git
 cd npoint-uz
-
+```
+```bash
 # Setup venv
 python -m venv venv
 source venv/bin/activate   # Mac/Linux
 venv\Scripts\activate      # Windows
-
+```
+```bash
 # Install deps
 pip install -r requirements.txt
-
+```
+```bash
 # Run migrations
 python manage.py migrate
-
+```
+```bash
 # Create admin
 python manage.py createsuperuser
-
+```
+```bash
 # Start server
 python manage.py runserver
-🔑 API Usage
+```
+##🔑 API Usage
 Authentication
 Authorization: Token <your_api_token>
 
-Endpoints
-GET /api/public/json/ → List public JSON docs
+-Endpoints
+  -GET /api/public/json/ → List public JSON docs
+  -GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
+  -POST /api/public/json/ → Create new JSON doc (auth required)
 
-GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
-
-POST /api/public/json/ → Create new JSON doc (auth required)
-
-Example (Python)
-python
-Copy code
+-Example (Python)
+  -python
+  -Copy code
+```bash
 import requests
 
 url = "https://npoint.uz/api/johndoe/todolist/13/"
@@ -107,17 +112,17 @@ headers = {"Authorization": "Token YOUR_API_TOKEN"}
 
 res = requests.get(url, headers=headers)
 print(res.json())
+```
+---
 📊 Statistics
-The system tracks:
+-The system tracks:
 
-Total Users
+  -Total Users
 
-Total JSON Files
+  -Total JSON Files
 
-API Calls (incremented per request)
-
-Displayed in index.html and main.html via a shared _stats.html template.
-
+  -API Calls (incremented per request)
+---
 ⚙️ Project Structure
 swift
 Copy code
@@ -134,17 +139,19 @@ npoint_project/
 │   ├── json_grid.png
 │   └── api_example.png
 └── manage.py
+---
+
 🔒 Privacy Policy
-By using Npoint Uz, you agree that:
+-By using Npoint Uz, you agree that:
 
-JSON content belongs to you
+  -JSON content belongs to you
 
-Public APIs are open access
+  -Public APIs are open access
 
-Tokens are your responsibility
+  -Tokens are your responsibility
 
-See Privacy Policy for details.
-
+**See Privacy Policy for details.**
+---
 🤝 Contributing
 We welcome contributions from the community!
 
@@ -154,30 +161,32 @@ Fork the repository
 
 Create a branch for your feature or bugfix
 
-bash
+```bash
 Copy code
 git checkout -b feature/your-feature-name
+```
 Commit your changes with clear messages
-
-bash
+```bash
 Copy code
 git commit -m "Add: new feature description"
+```
 Push to your fork
-
-bash
+```bash
 Copy code
 git push origin feature/your-feature-name
+```
 Open a Pull Request describing your changes
 
-Please follow best practices:
+-Please follow best practices:
 
-Keep code clean and readable
+-Keep code clean and readable
 
-Add comments where necessary
+-Add comments where necessary
 
-Update documentation if you add/change features
+**Update documentation if you add/change features**
 
 📧 Contact
 🌐 Website: https://npoint.uz
-📧 Email: your-email@example.com
+📧 Email: 
+---
 ## 📜 License
