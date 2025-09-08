@@ -96,15 +96,16 @@ python manage.py runserver
 Authentication
 Authorization: Token <your_api_token>
 
--Endpoints
-  -GET /api/public/json/ → List public JSON docs
-  -GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
-  -POST /api/public/json/ → Create new JSON doc (auth required)
+- Endpoints
+  - GET /api/public/json/ → List public JSON docs
+  - GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
+  - POST /api/public/json/ → Create new JSON doc (auth required)
 
--Example (Python)
-  -python
-  -Copy code
+- Example (Python)
 ```bash
+  - python
+  -Copy code
+
 import requests
 
 url = "https://npoint.uz/api/johndoe/todolist/13/"
@@ -115,7 +116,7 @@ print(res.json())
 ```
 ---
 ## **📊 Statistics**
--The system tracks:
+- The system tracks:
 
   - Total Users
 
@@ -123,7 +124,7 @@ print(res.json())
 
   - API Calls (incremented per request)
 ---
-⚙️ Project Structure
+## **⚙️ Project Structure**
 ```swift
 Copy code
 npoint_project/
@@ -143,7 +144,7 @@ npoint_project/
 ---
 
 ## **🔒 Privacy Policy**
--By using Npoint Uz, you agree that:
+- By using Npoint Uz, you agree that:
 
   - JSON content belongs to you
 
@@ -186,8 +187,8 @@ Open a Pull Request describing your changes
 
 **Update documentation if you add/change features**
 
-📧 Contact
-🌐 Website: https://npoint.uz
-📧 Email: 
+## **📧 Contact**
+- 🌐 Website: https://npoint.uz
+- 📧 Email: 
 ---
-## 📜 License
+## **📜 License**
