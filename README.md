@@ -69,12 +69,11 @@ It is built with **Django + Django REST Framework**, styled with **Bootstrap 4**
 # Clone repo
 git clone https://github.com/your-username/npoint-uz.git
 cd npoint-uz
-'''
 
 # Setup venv
 python -m venv venv
-source venv/bin/activate  # Mac/Linux
-venv\Scripts\activate     # Windows
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
 
 # Install deps
 pip install -r requirements.txt
@@ -87,19 +86,20 @@ python manage.py createsuperuser
 
 # Start server
 python manage.py runserver
-##🔑 API Usage
+🔑 API Usage
 Authentication
 Authorization: Token <your_api_token>
 
-#Endpoints
-
+Endpoints
 GET /api/public/json/ → List public JSON docs
 
 GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
 
 POST /api/public/json/ → Create new JSON doc (auth required)
 
-# Example (Python)
+Example (Python)
+python
+Copy code
 import requests
 
 url = "https://npoint.uz/api/johndoe/todolist/13/"
@@ -107,9 +107,7 @@ headers = {"Authorization": "Token YOUR_API_TOKEN"}
 
 res = requests.get(url, headers=headers)
 print(res.json())
-
-##📊 Statistics
-
+📊 Statistics
 The system tracks:
 
 Total Users
@@ -118,9 +116,11 @@ Total JSON Files
 
 API Calls (incremented per request)
 
-Shown in index.html and main.html via a shared _stats.html template.
+Displayed in index.html and main.html via a shared _stats.html template.
 
-## ⚙️ Project Structure
+⚙️ Project Structure
+swift
+Copy code
 npoint_project/
 ├── npoint_app/
 │   ├── models.py
@@ -134,9 +134,7 @@ npoint_project/
 │   ├── json_grid.png
 │   └── api_example.png
 └── manage.py
-
-## 🔒 Privacy Policy
-
+🔒 Privacy Policy
 By using Npoint Uz, you agree that:
 
 JSON content belongs to you
@@ -145,43 +143,41 @@ Public APIs are open access
 
 Tokens are your responsibility
 
-See Privacy Policy
- for details
+See Privacy Policy for details.
 
-## 🤝 Contributing
+🤝 Contributing
+We welcome contributions from the community!
 
-We welcome contributions from the community!  
+To contribute:
 
-To contribute:  
-1. **Fork** the repository  
-2. **Create a branch** for your feature or bugfix  
-   ```bash
-   git checkout -b feature/your-feature-name
+Fork the repository
 
-3. **Commit your changes** with clear messages
-    ```bash
-    git commit -m "Add: new feature description"
+Create a branch for your feature or bugfix
 
+bash
+Copy code
+git checkout -b feature/your-feature-name
+Commit your changes with clear messages
 
-4. **Push** to your fork
-    ```bash
-    git push origin feature/your-feature-name
+bash
+Copy code
+git commit -m "Add: new feature description"
+Push to your fork
 
-5. **Open a Pull Request** describing your changes
+bash
+Copy code
+git push origin feature/your-feature-name
+Open a Pull Request describing your changes
 
-- **Please follow best practices:**
+Please follow best practices:
 
-- **Keep code clean and readable
+Keep code clean and readable
 
-- **Add comments where necessary**
+Add comments where necessary
 
-- **Update documentation if you add/change features**
+Update documentation if you add/change features
 
-## 📧 Contact
-
+📧 Contact
 🌐 Website: https://npoint.uz
-
-📧 Email: [your-email@example.com
-]
-
+📧 Email: your-email@example.com
 ## 📜 License
