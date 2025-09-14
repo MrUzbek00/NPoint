@@ -1,4 +1,7 @@
-# Npoint Uz
+<p align="center">
+  <img src="./npoint_app/static/npoint_app/images/npoint_logo.png" alt="NPoint" width="250"/>
+</p>
+
 
 [![Django](https://img.shields.io/badge/Django-5.0-green?logo=django)](https://www.djangoproject.com/)
 [![DRF](https://img.shields.io/badge/DRF-REST_Framework-red?logo=django)](https://www.django-rest-framework.org/)
@@ -69,36 +72,43 @@ It is built with **Django + Django REST Framework**, styled with **Bootstrap 4**
 # Clone repo
 git clone https://github.com/your-username/npoint-uz.git
 cd npoint-uz
-
+```
+```bash
 # Setup venv
 python -m venv venv
-source venv/bin/activate  # Mac/Linux
-venv\Scripts\activate     # Windows
-
+source venv/bin/activate   # Mac/Linux
+venv\Scripts\activate      # Windows
+```
+```bash
 # Install deps
 pip install -r requirements.txt
-
+```
+```bash
 # Run migrations
 python manage.py migrate
-
+```
+```bash
 # Create admin
 python manage.py createsuperuser
-
+```
+```bash
 # Start server
 python manage.py runserver
-##🔑 API Usage
+```
+## **🔑 API Usage**
 Authentication
 Authorization: Token <your_api_token>
 
-#Endpoints
+- Endpoints
+  - GET /api/public/json/ → List public JSON docs
+  - GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
+  - POST /api/public/json/ → Create new JSON doc (auth required)
 
-GET /api/public/json/ → List public JSON docs
+- Example (Python)
+```bash
+  - python
+  -Copy code
 
-GET /api/public/json/<username>/<slug>/<id>/ → Get JSON doc
-
-POST /api/public/json/ → Create new JSON doc (auth required)
-
-# Example (Python)
 import requests
 
 url = "https://npoint.uz/api/johndoe/todolist/13/"
@@ -106,20 +116,20 @@ headers = {"Authorization": "Token YOUR_API_TOKEN"}
 
 res = requests.get(url, headers=headers)
 print(res.json())
+```
+---
+## **📊 Statistics**
+- The system tracks:
 
-##📊 Statistics
+  - Total Users
 
-The system tracks:
+  - Total JSON Files
 
-Total Users
-
-Total JSON Files
-
-API Calls (incremented per request)
-
-Shown in index.html and main.html via a shared _stats.html template.
-
-## ⚙️ Project Structure
+  - API Calls (incremented per request)
+---
+## **⚙️ Project Structure**
+```swift
+Copy code
 npoint_project/
 ├── npoint_app/
 │   ├── models.py
@@ -133,54 +143,55 @@ npoint_project/
 │   ├── json_grid.png
 │   └── api_example.png
 └── manage.py
+```
+---
 
-## 🔒 Privacy Policy
+## **🔒 Privacy Policy**
+- By using Npoint Uz, you agree that:
 
-By using Npoint Uz, you agree that:
+  - JSON content belongs to you
 
-JSON content belongs to you
+  - Public APIs are open access
 
-Public APIs are open access
+  - Tokens are your responsibility
 
-Tokens are your responsibility
+**See Privacy Policy for details.**
+---
+## **🤝 Contributing**
+We welcome contributions from the community!
 
-See Privacy Policy
- for details
+To contribute:
 
-## 🤝 Contributing
+Fork the repository
 
-We welcome contributions from the community!  
+Create a branch for your feature or bugfix
 
-To contribute:  
-1. **Fork** the repository  
-2. **Create a branch** for your feature or bugfix  
-   ```bash
-   git checkout -b feature/your-feature-name
+```bash
+Copy code
+git checkout -b feature/your-feature-name
+```
+Commit your changes with clear messages
+```bash
+Copy code
+git commit -m "Add: new feature description"
+```
+Push to your fork
+```bash
+Copy code
+git push origin feature/your-feature-name
+```
+Open a Pull Request describing your changes
 
-3. **Commit your changes** with clear messages
-    ```bash
-    git commit -m "Add: new feature description"
+- Please follow best practices:
 
+- Keep code clean and readable
 
-4. **Push** to your fork
-    ```bash
-    git push origin feature/your-feature-name
+- Add comments where necessary
 
-5. **Open a Pull Request** describing your changes
+**Update documentation if you add/change features**
 
-- **Please follow best practices:**
-
-- **Keep code clean and readable
-
-- **Add comments where necessary**
-
-- **Update documentation if you add/change features**
-
-## 📧 Contact
-
-🌐 Website: https://npoint.uz
-
-📧 Email: [your-email@example.com
-]
-
-## 📜 License
+## **📧 Contact**
+- 🌐 Website: https://npoint.uz
+- 📧 Email: 
+---
+## **📜 License**
