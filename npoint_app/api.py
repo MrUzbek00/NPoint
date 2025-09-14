@@ -16,37 +16,37 @@ from .models import JSONData
 from .serializers import JSONDataSerializer
 
 
-class JSONDataViewSet(viewsets.ModelViewSet):
-    queryset = JSONData.objects.all()
-    serializer_class = JSONDataSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+# class JSONDataViewSet(viewsets.ModelViewSet):
+#     queryset = JSONData.objects.all()
+#     serializer_class = JSONDataSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return JSONData.objects.filter(Q(is_public=True) | Q(user=user))
-        return JSONData.objects.filter(is_public=True)
+#     def get_queryset(self):
+#         user = self.request.user
+#         if user.is_authenticated:
+#             return JSONData.objects.filter(Q(is_public=True) | Q(user=user))
+#         return JSONData.objects.filter(is_public=True)
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+#     def perform_create(self, serializer):
+#         serializer.save(user=self.request.user)
 
-    @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated], url_path='content' )
-    def my_jsons(self, request):
-        user = request.user
-        jsons = JSONData.objects.filter(user=user)
-        page = self.paginate_queryset(jsons)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
-        serializer = self.get_serializer(jsons, many=True)
-        return Response(serializer.data)
+#     @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated], url_path='content' )
+#     def my_jsons(self, request):
+#         user = request.user
+#         jsons = JSONData.objects.filter(user=user)
+#         page = self.paginate_queryset(jsons)
+#         if page is not None:
+#             serializer = self.get_serializer(page, many=True)
+#             return self.get_paginated_response(serializer.data)
+#         serializer = self.get_serializer(jsons, many=True)
+#         return Response(serializer.data)
     
-    def content(self, request, pk=None):
-        obj = self.get_object()
-        # ensure non-owners can only see public docs
-        if not obj.is_public and (not request.user.is_authenticated or request.user != obj.user):
-            return Response(status=404)
-        return Response(obj.json_content)
+#     def content(self, request, pk=None):
+#         obj = self.get_object()
+#         # ensure non-owners can only see public docs
+#         if not obj.is_public and (not request.user.is_authenticated or request.user != obj.user):
+#             return Response(status=404)
+#         return Response(obj.json_content)
 
 
 # class MyViewSet(viewsets.ViewSet):
@@ -84,8 +84,10 @@ class MyViewSet(viewsets.ViewSet):
             raise Http404
 
         # Access control: public → ok for any authenticated user; private → only owner
-        if not obj.is_public and request.user.id != obj.user_id:
-            raise Http404  # hide existence
+        print(request.user, obj.user_id)
+        if not obj.is_public and request.user.user_id != obj.user_id:
+            raise Http404() 
+         # hide existence
 
         # Optional: increment access counter
         JSONData.objects.filter(pk=obj.pk).update(access_count=F("access_count") + 1)

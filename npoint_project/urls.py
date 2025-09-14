@@ -19,11 +19,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
-from npoint_app.api import JSONDataViewSet
 from npoint_app.api import MyViewSet
 
 router = DefaultRouter()
-router.register(r"public/json", JSONDataViewSet, basename="public-json")
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
